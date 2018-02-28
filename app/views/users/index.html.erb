@@ -1,0 +1,43 @@
+<div class="container">
+    <h1>To Do List Application</h1>
+    <div class="form-group">
+    <h3>Sign up</h3>
+    <%= form_for User.new, url: users_path do |form| %>
+        <div class="text-field form-group col-md-6">
+            <%= form.text_field :name, placeholder: 'Name', class: "form-control"%>
+        </div>
+
+        <div class="text-field form-group col-md-6">
+            <%= form.text_field :email, placeholder: 'Email' , class: "form-control"%>
+        </div> 
+
+        <div class="text-field form-group">
+            <%= form.password_field :password ,placeholder: 'Password' , class: "form-control"%>
+        </div>
+
+        <div class="form-group">
+          <%= form.submit "Create an account", class: "text-field btn-submit form-control" %>
+        </div>
+
+     <% end  %>  
+    </div>      
+    
+
+    <div class="form-group">
+      <h3>Login</h3>     
+      <%= form_for :session, url: users_login_path do |form| %>
+        <div class="text-field form-group">
+          <%= form.text_field :email, type: 'email', placeholder: "Email Address", class: "form-control" %>
+        </div>
+
+        <div class="password-field form-group">
+          <%= form.password_field :password, placeholder: "Create a Password", class: "form-control" %>
+        </div>
+
+        <div class="submit-field form-group" >
+          <%= form.submit 'Log In', class: "form-control form-group-submit" %>
+        </div>
+              
+        <% end %>
+    </div>        
+</div>
