@@ -32,6 +32,10 @@ class UsersController < ApplicationController
      	redirect_to '/'
 	end
 
+	def show
+		@task = Task.where(user_id: params[:id])
+		@task =  @task.order("start_date ASC")
+	end 
 
 
 
