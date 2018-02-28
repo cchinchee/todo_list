@@ -1,0 +1,6 @@
+<tr class="task-list-details row" id="delete_<%= task.id %>">
+	<td class="task-list-details col-lg-3"><%= task.start_date.strftime('%d %B %Y') %></td>
+	<td class="task-list-details col-lg-3"><%= task.title %></td>
+	<td class="task-list-details col-lg-5"><%= task.details %></td>
+	<td class="task-list-details col-lg-1"><%= link_to "Delete", user_task_path(task.user_id, task.id), method: :delete, data: {confirm: "Do you want to delete this record?"}, remote:true %></td>
+</tr>
