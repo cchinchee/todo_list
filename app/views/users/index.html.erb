@@ -3,11 +3,11 @@
     <div class="form-group">
     <h3>Sign up</h3>
     <%= form_for User.new, url: users_path do |form| %>
-        <div class="text-field form-group col-md-6">
+        <div class="text-field form-group">
             <%= form.text_field :name, placeholder: 'Name', class: "form-control"%>
         </div>
 
-        <div class="text-field form-group col-md-6">
+        <div class="text-field form-group">
             <%= form.text_field :email, placeholder: 'Email' , class: "form-control"%>
         </div> 
 
@@ -22,7 +22,8 @@
      <% end  %>  
     </div>      
     
-
+    <br>
+    
     <div class="form-group">
       <h3>Login</h3>     
       <%= form_for :session, url: users_login_path do |form| %>
