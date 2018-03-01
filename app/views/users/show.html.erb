@@ -21,11 +21,12 @@
 					
 						<td class="task-list-details col-lg-3"><%= d.title %></td>
 						<td class="task-list-details col-lg-3"><%= d.details %></td>
-						<td class="task-list-details col-lg-3"><%= d.details %></td>
+						
 					
-						<%#form_for :task, url: user_task_path(d.user_id, d.id), method: :patch do |form| %>	
-							<%# form.check_box :status %>
-						<%# end %>	
+						<%=form_for :task, url: user_task_path(d.user_id, d.id), method: :patch do |form| %>	
+
+						<td class="task-list-details col-lg-3"><%= form.check_box :status, id:"check" %></td>
+						<% end %>	
 
 					</tr>
 					<% end  %>
@@ -53,7 +54,7 @@
 			</tr>
 		
 			
-			<%= render @task %>
+			<%= render @tasks %>
 			
 			
 		</table>	

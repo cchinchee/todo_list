@@ -33,9 +33,9 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@task = Task.where(user_id: params[:id])
-		@task =  @task.order("start_date ASC")
-		@today_task = @task.where(start_date: DateTime.now)
+		@tasks = Task.where(user_id: params[:id]).order("start_date ASC")
+	
+		@today_task = @tasks.where(start_date: DateTime.now)
 	end 
 
 
