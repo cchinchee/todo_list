@@ -4,32 +4,42 @@
 	<br>
 	<h3>Hi, <%= @user.name %>.</h3>
 	
+	<div class="row">
+		<div class="col-md-6">
+			<h3>Things to do</h3>
+			<h5>Today Date: <%= DateTime.now.strftime('%d %B %Y') %></h5>
+			<div class="table-container">
+				<table class="task-list">
+					<tr class="task-list-title">
+						<th class="task-list-item col-lg-3">Title </th>
+						<th class="task-list-item col-lg-3">Details</th>
+						<th class="task-list-item col-lg-3">Completed</th>
+					</tr>
+			
+					<% @today_task.each do |d| %>
+					<tr class="task-list-details">
+					
+						<td class="task-list-details col-lg-3"><%= d.title %></td>
+						<td class="task-list-details col-lg-3"><%= d.details %></td>
+						<td class="task-list-details col-lg-3"><%= d.details %></td>
+					
+						<%#form_for :task, url: user_task_path(d.user_id, d.id), method: :patch do |form| %>	
+							<%# form.check_box :status %>
+						<%# end %>	
 
-	
-	<div>
-		<a class="modal-btn navbar-right-1 addpointercursor" data-toggle="modal" data-target="#signUpModalMain">Create a ToDo</a>
-
-
-		<div class="modal fade" id="signUpModalMain" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      
-		      <div class="modal-body">
-		        <div class="modal-close">
-		          <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true">&times;</button>
-		        </div>
-
-		        <div class="modal-container">
-		          <h3>Create a ToDo</h3>
-		          <br>
-		          <%= render partial: "/tasks/form" %> 
-		          
-		        </div>
-		      </div>
-
-		    </div>
-		  </div>
+					</tr>
+					<% end  %>
+				</table>	
+			</div>	
 		</div>
+
+		<div class="col-md-6">
+			
+			<h3>Create a Todo</h3>
+			<%= render partial: "/tasks/form" %> 
+
+		</div>
+
 	</div>
 	
 	<div class="table-container">

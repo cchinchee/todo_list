@@ -5,7 +5,6 @@ class TasksController < ApplicationController
 	def create
 		@task = current_user.tasks.new(task_params)
 		if @task.save
-			flash[:success] = "ToDo created sucessfully."
 			respond_to do |format|
 			format.html {redirect_to "/users/#{current_user.id}"}
 			format.js
@@ -41,7 +40,7 @@ class TasksController < ApplicationController
 
 	private
 	def task_params
-		params.require(:task).permit(:title, :details, :start_date)
+		params.require(:task).permit(:title, :details, :start_date, :status)
 	end
 
 	def find_task
