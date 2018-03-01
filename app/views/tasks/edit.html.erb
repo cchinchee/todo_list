@@ -1,0 +1,22 @@
+<div class="container">
+	<h2>Edit your ToDo HERE</h2>
+
+	<%= form_for :task, url: user_task_path, method: :put do |form| %>
+	<div class="text-field form-group">
+		<p>Date:
+		<%= form.date_field :start_date, placeholder: 'Date'%></p>
+	</div>
+	<div class="text-field form-group">
+	    <%= form.text_field :title, placeholder: 'Title', class: "form-control"%>
+	</div>
+
+	<div class="text-field form-group">
+	    <%= form.text_area :details, :rows => 8, style: 'width:100%;', placeholder: 'Details', class: "form-control"%>
+	</div>
+
+	<div class="form-group">
+	  <%= form.submit "Update", class: "text-field btn-submit form-control" %>
+	</div> 
+
+	<% end %>
+</div>	

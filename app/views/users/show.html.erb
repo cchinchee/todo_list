@@ -1,4 +1,53 @@
+<div class="container">
+	<%= link_to 'Log out',users_logout_path, method: :delete %>
 
-<%= link_to 'Log out',users_logout_path, method: :delete %>
+	<br>
+	<h3>Hi, <%= @user.name %>.</h3>
+	
 
-<%= @user.name %>
+	
+	<div>
+		<a class="modal-btn navbar-right-1 addpointercursor" data-toggle="modal" data-target="#signUpModalMain">Create a ToDo</a>
+
+
+		<div class="modal fade" id="signUpModalMain" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      
+		      <div class="modal-body">
+		        <div class="modal-close">
+		          <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true">&times;</button>
+		        </div>
+
+		        <div class="modal-container">
+		          <h3>Create a ToDo</h3>
+		          <br>
+		          <%= render partial: "/tasks/form" %> 
+		          
+		        </div>
+		      </div>
+
+		    </div>
+		  </div>
+		</div>
+	</div>
+	
+	<div class="table-container">
+		<h3>ToDo List</h3>
+		<table class="task-list" id="task_list">
+			<tr class="task-list-title row">
+				<th class="task-list-item col-lg-3">Date </th>
+				<th class="task-list-item col-lg-3">Title </th>
+				<th class="task-list-item col-lg-3">Details</th>
+
+			</tr>
+		
+			
+			<%= render @task %>
+			
+			
+		</table>	
+	</div>	
+
+
+</div>

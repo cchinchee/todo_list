@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 		@user = User.find_by(email: params[:session][:email])
 		if @user != nil && @user.authenticate(params[:session][:password])
 			session[:user_id] = @user.id
-
+			flash[:info] = "Signed in sucessfully."
 			redirect_to "/users/#{@user.id}"
 
 		else
@@ -28,10 +28,14 @@ class UsersController < ApplicationController
 
 	def destroy
 		session[:user_id] = nil
-		flash[:notice] = "Signed out sucessfully."
+		flash[:info] = "Signed out sucessfully."
      	redirect_to '/'
 	end
 
+	def show
+		@task = Task.where(user_id: params[:id])
+		@task =  @task.order("start_date ASC")
+	end 
 
 
 
