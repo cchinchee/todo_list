@@ -18,13 +18,13 @@
 					<p>Do you have anything to do for today?</p>
 				<% else  %>
 					<% @incompleted_task.each do |d| %>
-					<tr class="task-list-details">
+					<tr class="task-list-details" id="done_<%= d.id %>">
 					
 						<td class="task-list-details col-lg-3"><%= d.title %></td>
 						<td class="task-list-details col-lg-3"><%= d.details %></td>
 						<%=form_for :task, url: tasks_update_path(d.user_id, d.id), id:"update_task", remote: true do |form| %>	
 
-						<td class="task-list-details col-lg-3" id="done_<%= d.id %>"><%= form.submit "Update", class: "text-field btn-submit form-control" %></td>
+						<td class="task-list-details col-lg-3" ><%= form.submit "Update", class: "text-field btn-submit form-control" %></td>
 						<td class="task-list-details col-lg-1"><%= form.check_box :status, {:class => "edit_form"}, "completed", "uncompleted"%></td>
 
 						<% end %>	
@@ -58,7 +58,7 @@
 	<hr>
 	<div>
 		<h3>Coming Tasks</h3>
-		<span><%= DateTime.now.strftime('%d %B %Y')%> - <%= ((Date.today)+6).strftime('%d %B %Y')%></span> 
+		<span><%= ((Date.today)+1).strftime('%d %B %Y')%> - <%= ((Date.today)+7).strftime('%d %B %Y')%></span> 
 		<br>
 		<br>
 		<div class="table-container">
