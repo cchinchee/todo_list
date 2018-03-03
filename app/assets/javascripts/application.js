@@ -17,3 +17,13 @@
 //= require_tree .
 
 
+$( document ).ready(function(){
+	var submit = document.getElementsByClassName("submit_form");
+	var tick = document.getElementsByClassName("edit_form");
+	$(submit).remove();
+	$(tick).click(function(){
+		$(this).parent('form').submit();
+	});
+});
+
+
