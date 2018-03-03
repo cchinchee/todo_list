@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 		@today_task = @tasks.where(start_date: Date.today)
 		@incompleted_task = @today_task.where(status: 0)
 		@completed = @today_task.where(status: 1)
-		@weekly_tasks = @tasks.where(start_date: (Date.today)..((Date.today)+6))
+		@weekly_tasks = @tasks.where(start_date: (Date.today)+1..((Date.today)+7))
 	end 
 
 	def dashboard
