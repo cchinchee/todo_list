@@ -1,64 +1,93 @@
+<%= render partial: "/layouts/navbar" %>
 <div class="container">
-	<%= link_to 'Log out',users_logout_path, method: :delete %>
 
 	<br>
-	<h3>Hi, <%= @user.name %>.</h3>
+	<h1>Hi, <%= @user.name %>.</h1>
+	<span class="text-right">Date: <%= DateTime.now.strftime('%d %B %Y') %></span>
 	
 	<div class="row">
 		<div class="col-md-6">
-			<h3>Things to do</h3>
-			<h5>Today Date: <%= DateTime.now.strftime('%d %B %Y') %></h5>
+			<h3>Today's task</h3> 
 			<div class="table-container">
 				<table class="task-list">
 					<tr class="task-list-title">
 						<th class="task-list-item col-lg-3">Title </th>
 						<th class="task-list-item col-lg-3">Details</th>
-						<th class="task-list-item col-lg-3">Completed</th>
 					</tr>
-			
-					<% @today_task.each do |d| %>
+				<% if @incompleted_task.count == 0 %>
+					<p>Do you have anything to do for today?</p>
+				<% else  %>
+					<% @incompleted_task.each do |d| %>
 					<tr class="task-list-details">
 					
 						<td class="task-list-details col-lg-3"><%= d.title %></td>
 						<td class="task-list-details col-lg-3"><%= d.details %></td>
-						
-					
-						<%=form_for :task, url: user_task_path(d.user_id, d.id), method: :patch do |form| %>	
+						<%=form_for :task, url: tasks_update_path(d.user_id, d.id), id:"update_task", remote: true do |form| %>	
 
-						<td class="task-list-details col-lg-3"><%= form.check_box :status, id:"check" %></td>
+						<td class="task-list-details col-lg-3" id="done_<%= d.id %>"><%= form.submit "Update", class: "text-field btn-submit form-control" %></td>
+						<td class="task-list-details col-lg-1"><%= form.check_box :status, {:class => "edit_form"}, "completed", "uncompleted"%></td>
+
 						<% end %>	
+						
 
 					</tr>
 					<% end  %>
+				<% end %>	
 				</table>	
-			</div>	
+			</div>
 		</div>
+		<div class="col-md-6 tasks_complete">
+			<h3>Tasks Completed</h3> 
+			<div class="table-container">
+				<table class="task-list" id="completed_list">
+					<tr class="task-list-title">
+						<th class="task-list-item col-lg-3">Title</th>
+						<th class="task-list-item col-lg-3">Details</th>
+					</tr>
+				<% if @completed.count == 0 %>
+					<p>No task completed</p>
+				<% else  %>
 
-		<div class="col-md-6">
-			
-			<h3>Create a Todo</h3>
-			<%= render partial: "/tasks/form" %> 
-
-		</div>
-
+					<%= render @completed%>
+					
+				<% end %>	
+				</table>	
+			</div>
+		</div>	
 	</div>
-	
-	<div class="table-container">
-		<h3>ToDo List</h3>
-		<table class="task-list" id="task_list">
-			<tr class="task-list-title row">
-				<th class="task-list-item col-lg-3">Date </th>
-				<th class="task-list-item col-lg-3">Title </th>
-				<th class="task-list-item col-lg-3">Details</th>
+	<hr>
+	<div>
+		<h3>Coming Tasks</h3>
+		<span><%= DateTime.now.strftime('%d %B %Y')%> - <%= ((Date.today)+6).strftime('%d %B %Y')%></span> 
+		<br>
+		<br>
+		<div class="table-container">
+			<table class="task-list">
+				<tr class="task-list-title row">
+					<th class="task-list-item col-lg-3">Date </th>
+					<th class="task-list-item col-lg-3">Title </th>
+					<th class="task-list-item col-lg-5">Details</th>
+					<th class="task-list-item col-lg-3">Status</th>
+				</tr>
 
-			</tr>
-		
-			
-			<%= render @tasks %>
-			
-			
-		</table>	
+				<% @weekly_tasks.each do |w| %>
+				<tr class="task-list-details row">
+				
+					<td class="task-list-details col-lg-3"><%= w.start_date.strftime('%d %B %Y') %></td>
+					<td class="task-list-details col-lg-3"><%= w.title %></td>
+					<td class="task-list-details col-lg-5"><%= w.details %></td>
+					<td class="task-list-details col-lg-3"><%= w.status %></td>
+					
+
+				</tr>
+				<% end  %>
+				
+			</table>	
+		</div>
 	</div>	
-
-
+	<br>
+	<br>
+	<%= link_to 'Edit or Add a new ToDo',users_dashboard_path(current_user.id), class: "add_todo text-field text-center btn-submit form-control" %>
+	<br>
+	<br>
 </div>

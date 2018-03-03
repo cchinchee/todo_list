@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
 	include ApplicationHelper
-	before_action :find_task, only: [:edit, :update]
+	before_action :find_task, only: [:edit, :update, :edit_update]
 
 	def create
 		@task = current_user.tasks.new(task_params)
@@ -28,14 +28,32 @@ class TasksController < ApplicationController
 		if current_user.id == @task.user_id
 			@task.update(task_params)
 			flash[:success] = "ToDo updated sucessfully."
-			redirect_to "/users/#{@task.user_id}"
+			redirect_to "/users/#{@task.user_id}/dashboard"
+		else
+			flash[:errors] = "Update failed!"
+			redirect_to "/users/#{@task.user_id}/dashboard"
+				
+		end
+	end
+
+
+	def edit_update
+		if current_user.id == @task.user_id
+
+			@task.update(task_params)
+
+			respond_to do |format|
+			format.html { redirect_to "/users/#{current_user.id}" }
+			format.js
+			end
+			# flash[:success] = "ToDo updated sucessfully."
+			# redirect_to "/users/#{@task.user_id}"
 		else
 			flash[:errors] = "Update failed!"
 			redirect_to "/users/#{@task.user_id}"
 				
 		end
 	end
-
 	
 
 	private
@@ -46,4 +64,10 @@ class TasksController < ApplicationController
 	def find_task
 		@task = Task.find_by(id: params[:id])
 	end 
+
+	def completed_task
+		@tasks = Task.find_by(id: params[:id])
+		@today_task = @tasks.where(start_date: DateTime.now)
+		@incompleted = @today_task.where(status: 0)
+	end
 end

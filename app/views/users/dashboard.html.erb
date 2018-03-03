@@ -1,0 +1,26 @@
+<%= render partial: "/layouts/navbar" %>
+
+<div class="container">
+	<h3>Create a Todo</h3>
+	<%= render partial: "/tasks/form" %> 
+<hr>
+<br>
+	<div class="table-container">
+		
+		<table class="task-list" id="task_list">
+			<tr class="task-list-title row">
+				<th class="task-list-item col-lg-3">Date </th>
+				<th class="task-list-item col-lg-3">Title </th>
+				<th class="task-list-item col-lg-3">Details</th>
+				<th class="task-list-item col-lg-3">Status</th>
+
+			</tr>
+		
+			
+			<%= render @tasks %>
+			
+			
+		</table>	
+	</div>	
+<br>
+</div>

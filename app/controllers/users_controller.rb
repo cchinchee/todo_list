@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 	include ApplicationHelper
 	
-	before_action :find_user, only: [:show, :edit, :update] 
+	before_action :find_user, only: [:show, :edit, :update, :dashboard] 
 	before_action :require_login, only: [:show, :edit]
 
 	def create
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 		@user = User.find_by(email: params[:session][:email])
 		if @user != nil && @user.authenticate(params[:session][:password])
 			session[:user_id] = @user.id
-			flash[:info] = "Signed in sucessfully."
+			
 			redirect_to "/users/#{@user.id}"
 
 		else
@@ -34,11 +34,17 @@ class UsersController < ApplicationController
 
 	def show
 		@tasks = Task.where(user_id: params[:id]).order("start_date ASC")
-	
-		@today_task = @tasks.where(start_date: DateTime.now)
+		@today_task = @tasks.where(start_date: Date.today)
+		@incompleted_task = @today_task.where(status: 0)
+		@completed = @today_task.where(status: 1)
+		@weekly_tasks = @tasks.where(start_date: (Date.today)..((Date.today)+6))
 	end 
 
+	def dashboard
+		@tasks = Task.where(user_id: params[:id]).order("start_date ASC")
 
+
+	end
 
 	private
 	def user_params
