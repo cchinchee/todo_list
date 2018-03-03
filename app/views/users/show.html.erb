@@ -47,9 +47,9 @@
 				<% if @completed.count == 0 %>
 					<p>No task completed</p>
 				<% else  %>
-
-					<%= render @completed%>
-					
+					<% @completed.each do |c| %>
+					<%= render partial:"tasks/completed", locals: { completed: c }%>
+					<% end  %>
 				<% end %>	
 				</table>	
 			</div>

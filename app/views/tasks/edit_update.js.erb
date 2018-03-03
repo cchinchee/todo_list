@@ -1,4 +1,4 @@
 
-$('#completed_list').append('<%= j render(@completed) %>');
-$('#done_<%= @incompleted.id %>').remove();
+$('#completed_list').append('<%= j render(partial: "tasks/completed", :locals => { :completed => @task})%>');
+$('#done_<%= @task.id %>').remove();
 
