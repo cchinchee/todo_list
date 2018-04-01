@@ -1,0 +1,24 @@
+<div class="table-container">
+	<table class="task-list">
+		<tr class="task-list-title">
+			<th class="task-list-item col-lg-3">Title </th>
+			<th class="task-list-item col-lg-3">Details</th>
+		</tr>
+		<% @tasks.each do |d| %>
+		<tr class="task-list-details" id="done_<%= d.id %>">
+		
+			<td class="task-list-details col-lg-3"><%= d.title %></td>
+			<td class="task-list-details col-lg-3"><%= d.details %></td>
+			<%=form_for :task, url: tasks_update_path(d.user_id, d.id), id:"update_task", remote: true do |form| %>	
+
+<!-- 			<td class="task-list-details col-lg-3" ><%# form.submit "Update", class: "text-field btn-submit form-control" %></td>
+			<td class="task-list-details col-lg-1"><%# form.check_box :status, {:class => "edit_form"}, "completed", "uncompleted"%></td> -->
+
+			<% end %>	
+			
+
+		</tr>
+		<% end  %>
+
+	</table>	
+</div>

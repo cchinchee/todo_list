@@ -1,6 +1,11 @@
 <%= form_for Task.new, url: user_tasks_path(@user.id), id:"create_task", remote: true do |form| %>
 
 <div class="text-field form-group">
+    <%= form.select(:category_id, @user.categories.all.collect {|u| [u.category_title, u.id]}, :prompt => 'Select') %>
+</div>
+
+
+<div class="text-field form-group">
 	<p>Date:
 	<%= form.date_field :start_date, placeholder: 'Date', id:"start_date_form"%></p>
 </div>

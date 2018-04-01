@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   get "/users/:id/dashboard" => "users#dashboard", as: "users_dashboard"
   resources :users do
   	resources :tasks
+  	resources :categories
   end	
+
+
 
   post "/users/login" => "users#login", as: "users_login"
   delete "/users/log_out" => "users#logout", as: "users_logout"

@@ -56,9 +56,26 @@
 		</div>	
 	</div>
 	<hr>
+
 	<div>
+		<h3>Categories</h3>
+
+		<div>
+			<% if @categories.count == 0  %>
+				<p>Please create a todo list</p>
+			<% else  %>
+				<% @categories.each do |a| %>
+				<%= link_to "#{a.category_title}", user_category_path(current_user.id, a.id)  %>
+
+				<% end   %>
+			<% end %>
+
+		</div>
+	</div>	
+
+	<!-- <div>
 		<h3>Coming Tasks</h3>
-		<span><%= ((Date.today)+1).strftime('%d %B %Y')%> - <%= ((Date.today)+7).strftime('%d %B %Y')%></span> 
+		<span><%# ((Date.today)+1).strftime('%d %B %Y')%> - <%# ((Date.today)+7).strftime('%d %B %Y')%></span> 
 		<br>
 		<br>
 		<div class="table-container">
@@ -70,21 +87,23 @@
 					<th class="task-list-item col-lg-3">Status</th>
 				</tr>
 
-				<% @weekly_tasks.each do |w| %>
+				<%# @weekly_tasks.each do |w| %>
 				<tr class="task-list-details row">
 				
-					<td class="task-list-details col-lg-3"><%= w.start_date.strftime('%d %B %Y') %></td>
-					<td class="task-list-details col-lg-3"><%= w.title %></td>
-					<td class="task-list-details col-lg-5"><%= w.details %></td>
-					<td class="task-list-details col-lg-3"><%= w.status %></td>
+					<td class="task-list-details col-lg-3"><%# w.start_date.strftime('%d %B %Y') %></td>
+					<td class="task-list-details col-lg-3"><%# w.title %></td>
+					<td class="task-list-details col-lg-5"><%# w.details %></td>
+					<td class="task-list-details col-lg-3"><%# w.status %></td>
 					
 
 				</tr>
-				<% end  %>
+				<%# end  %>
 				
 			</table>	
 		</div>
-	</div>	
+	</div>	 -->
+
+	
 	<br>
 	<br>
 	<%= link_to 'Edit or Add a new ToDo',users_dashboard_path(current_user.id), class: "add_todo text-field text-center btn-submit form-control" %>

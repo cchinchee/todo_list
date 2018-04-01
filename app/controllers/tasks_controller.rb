@@ -3,7 +3,9 @@ class TasksController < ApplicationController
 	before_action :find_task, only: [:edit, :update, :edit_update]
 
 	def create
+		
 		@task = current_user.tasks.new(task_params)
+		
 		if @task.save
 			respond_to do |format|
 			format.html {redirect_to "/users/#{current_user.id}"}
@@ -58,7 +60,7 @@ class TasksController < ApplicationController
 
 	private
 	def task_params
-		params.require(:task).permit(:title, :details, :start_date, :status)
+		params.require(:task).permit(:title, :details, :start_date, :status, :category_id)
 	end
 
 	def find_task
